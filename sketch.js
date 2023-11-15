@@ -1,4 +1,5 @@
 let outOfBounds = false;
+let gameStart = false;
 
 function setup() {
   createCanvas(600, 800);
@@ -7,7 +8,7 @@ function setup() {
   platforms = new Group(); // set up platform details
   platforms.collider = 'kinematic'; // platforms move by programming, not by collision
   platforms.x = () => random(0, canvas.w); // randomize horizontal placement of platforms
-  platforms.y = (i) => canvas.h + i * 100; // control vertical spacing of platforms
+  platforms.y = (i) => canvas.h + i * 125; // control vertical spacing of platforms
   platforms.w = 200;
   platforms.h = 15;
   platforms.velocity.y = 0; // control speed of platforms; larger = faster
@@ -15,7 +16,7 @@ function setup() {
   platformStart = new Group(); // create first platform in center position
   platformStart.collider = 'kinematic';
   platformStart.x = canvas.w/2; // sets first platform at center horizontally
-  platformStart.y = canvas.h-100; // sets first platform vertically with same spacing
+  platformStart.y = canvas.h-125; // sets first platform vertically with same spacing
   platformStart.w = 200;
   platformStart.h = 15;
   platformStart.velocity.y = 0; 
@@ -27,6 +28,7 @@ function setup() {
 }
 
 function draw() {
+
   background(100); 
   startGame(); // switch to button later
   if (mouse.presses()) { // starts game movement
@@ -38,7 +40,7 @@ function draw() {
   }
   renderStats(); // info only; checking how many platforms are spawned at any time
     // remove once physics are done
-  
+  gameEnd();
 }
   
 function drawPlatforms() { // separate function, can be used with start button later
@@ -75,9 +77,27 @@ function restartGame() { // restart game after losing
   startGame();
 }
 
+function onOpen() { // hide try again button on open
+  document.getElementById("endScreen").style.display="none";
+
+}
+
+function startButton() { // allow button to control game start
+  canvas.style.display="block";
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("endScreen").style.display="none";
+
+}
+
+function gameEnd() { // hide canvas on game end and show try again button
+  if (outOfBounds == true) {
+    canvas.style.display="none";
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("endScreen").style.display="block";
+  }
+}
 // to do
 // score
-// start screen and buttons
 // visuals
 // test platform spacing, gravity, velocity, etc
 // whatever else we want

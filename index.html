@@ -16,7 +16,25 @@
     
   </head>
 
-  <body>
+  <body onload="onOpen()">
     <script src="sketch.js"></script>
+   
+    <div id="startScreen">
+      <div id="instructions">
+          <h1 id="howToHead"> How to Play</h1>
+          <p id="instruction">
+              <br>
+                <p id="textA">  At the start of the game the snowball appears on one of the platforms you control.</p>
+              <br>
+               <p id="textB">   With the controls, change the angle of the platform to move the snowball around.</p>
+              <br>
+             <p id="textC">     Try your best to keep the snowball from hitting the edge of the screen as long as you can.</p>
+          </p>
+         <button onClick="startButton()">click to play</button>
+      </div>
+      </div>
+      <div id="endScreen">
+        <button id="restart" onClick="startButton()">try again</button>
+      </div>
   </body>
 </html>

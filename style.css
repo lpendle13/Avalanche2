@@ -4,5 +4,14 @@ html, body {
 }
 
 canvas {
+  display: none;
+}
+
+body {
+  background-color: gray;
+}
+
+#restart {
   display: block;
+  padding: 10px;
 }
