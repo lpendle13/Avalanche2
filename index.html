@@ -21,20 +21,28 @@
    
     <div id="startScreen">
       <div id="instructions">
-          <h1 id="howToHead"> How to Play</h1>
-          <p id="instruction">
-              <br>
-                <p id="textA">  At the start of the game the snowball appears on one of the platforms you control.</p>
-              <br>
-               <p id="textB">   With the controls, change the angle of the platform to move the snowball around.</p>
-              <br>
-             <p id="textC">     Try your best to keep the snowball from hitting the edge of the screen as long as you can.</p>
-          </p>
-         <button onClick="startButton()">click to play</button>
+          <h1 id="mainTitle">Avalanche 2</h1>
+         <button onClick="startButton()">Play</button>
+         <button onClick="rulesButton()">Rules</button>
       </div>
+      </div>
+      <div id="ruleScreen">
+        <p id="instruction">
+          <br>
+            <p id="textA">  At the start of the game the snowball appears on one of the platforms you control.</p>
+          <br>
+           <p id="textB">   With the controls, change the angle of the platform to move the snowball around.</p>
+          <br>
+         <p id="textC">     Try your best to keep the snowball from hitting the edge of the screen as long as you can.</p>
+        </p>
+        <button id="homeButton" onClick="homeButton()">Main menu</button>
       </div>
       <div id="endScreen">
-        <button id="restart" onClick="startButton()">try again</button>
+        <button id="restart" onClick="startButton()">Try again</button>
+        <button id="homeButton" onClick="homeButton()">Main menu</button>
+      </div>
+      <div id="gameScreen">
+        <h1 class="score">score bar goes here</h1>
       </div>
   </body>
 </html>

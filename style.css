@@ -15,3 +15,16 @@ body {
   display: block;
   padding: 10px;
 }
+
+#homeButton {
+  display: block;
+  padding: 10px;
+}
+
+#ruleScreen {
+  display: none;
+}
+
+#gameScreen {
+  display: none;
+}

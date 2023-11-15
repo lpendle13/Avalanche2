@@ -1,5 +1,6 @@
 let outOfBounds = false;
 let gameStart = false;
+let score = 0;
 
 function setup() {
   createCanvas(600, 800);
@@ -86,7 +87,17 @@ function startButton() { // allow button to control game start
   canvas.style.display="block";
   document.getElementById("startScreen").style.display="none";
   document.getElementById("endScreen").style.display="none";
+  document.getElementById("gameScreen").style.display="block";
+  document.getElementsByClassName('score')[0].innerHTML = 'Score: ' + score.toString();
+}
 
+function homeButton() { // allow button to navigate to main menu
+  canvas.style.display="none";
+  document.getElementById("startScreen").style.display="block";
+  document.getElementById("endScreen").style.display="none";
+  document.getElementById("ruleScreen").style.display="none";
+  ball.collider = 'static';
+  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
 }
 
 function gameEnd() { // hide canvas on game end and show try again button
@@ -95,6 +106,13 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("startScreen").style.display="none";
     document.getElementById("endScreen").style.display="block";
   }
+}
+
+function rulesButton() {
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("ruleScreen").style.display="block";
+  ball.collider = 'static';
+  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
 }
 // to do
 // score
