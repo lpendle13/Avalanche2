@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketch</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Sketch</title>
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="https://p5play.org/v3/p5play.js"></script>
-    <script src="https://p5play.org/v3/planck.min.js"></script>
-    
-  </head>
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
 
-  <body onload="onOpen()">
-    <script src="sketch.js"></script>
-   
-    <div id="startScreen">
-      <div id="instructions">
-          <h1 id="mainTitle">Avalanche 2</h1>
-         <button onClick="startButton()">Play</button>
-         <button onClick="rulesButton()">Rules</button>
-      </div>
-      </div>
-      <div id="ruleScreen">
-        <p id="instruction">
-          <br>
-            <p id="textA">  At the start of the game the snowball appears on one of the platforms you control.</p>
-          <br>
-           <p id="textB">   With the controls, change the angle of the platform to move the snowball around.</p>
-          <br>
-         <p id="textC">     Try your best to keep the snowball from hitting the edge of the screen as long as you can.</p>
-        </p>
-        <button id="homeButton" onClick="homeButton()">Main menu</button>
-      </div>
-      <div id="endScreen">
-        <button id="restart" onClick="startButton()">Try again</button>
-        <button id="homeButton" onClick="homeButton()">Main menu</button>
-      </div>
-      <div id="gameScreen">
-        <h1 class="score">score bar goes here</h1>
-      </div>
-  </body>
+  <script src="https://p5play.org/v3/p5play.js"></script>
+  <script src="https://p5play.org/v3/planck.min.js"></script>
+
+</head>
+
+<body onload="onOpen()">
+  <script src="sketch.js"></script>
+
+  <div id="startScreen">
+    <div id="instructions">
+      <h1 id="mainTitle">Avalanche 2</h1>
+      <button onClick="startButton()">Play</button>
+      <button onClick="rulesButton()">Rules</button>
+    </div>
+  </div>
+  <div id="ruleScreen">
+    <p id="instruction">
+      <br>
+    <p id="textA"> At the start of the game the snowball appears on one of the platforms you control.</p>
+    <br>
+    <p id="textB"> With the controls, change the angle of the platform to move the snowball around.</p>
+    <br>
+    <p id="textC"> Try your best to keep the snowball from hitting the edge of the screen as long as you can.</p>
+    </p>
+    <button id="homeButton" onClick="homeButton()">Main menu</button>
+  </div>
+  <div id="endScreen">
+    <h2 class="finalScore"></h2>
+    <h2 class="highScores"></h2>
+    <button id="restart" onClick="startButton()">Try again</button>
+    <button id="homeButton" onClick="homeButton()">Main menu</button>
+  </div>
+  <div id="gameScreen">
+    <h1 class="score">score bar goes here</h1>
+  </div>
+</body>
+
 </html>
