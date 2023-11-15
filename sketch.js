@@ -2,14 +2,18 @@ let outOfBounds = false;
 let gameStart = false;
 let score = 0;
 let finalScore = 0;
-let highScores = [400, 100, 3000, 4000, 5000];
-highScores.length = 5;
+let highScores = [400, 100, 3000, 1000, 5000];
+let storedScores = [];
 
 function setup() {
   createCanvas(1000, 800);
   world.gravity.y = 20;
-
-
+  
+  storedScores = getItem('storedScores');
+  if (storedScores) { // If there are stored scores, use them instead of the default high scores
+    highScores = storedScores;
+  }
+  highScores.sort(function (a, b) { return b - a });
 
   platforms = new Group(); // set up platform details
   platforms.collider = 'kinematic'; // platforms move by programming, not by collision
@@ -33,7 +37,6 @@ function setup() {
 }
 
 function draw() {
-
   background(100);
   startGame(); // switch to button later
   if (mouse.presses()) { // starts game movement
@@ -43,10 +46,10 @@ function draw() {
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
     restartGame();
   }
-  if (gameStart === true) {
+  if (gameStart === true) { // while the game is ongoing, count the score
     countScore();
   }
-  gameEnd();
+  gameEnd(); // repeatedly check if the ball is out of bounds
 }
 
 function drawPlatforms() { // separate function, can be used with start button later
@@ -107,36 +110,41 @@ function homeButton() { // allow button to navigate to main menu
   platformStart.velocity.y = 0; platforms.velocity.y = 0;
 }
 
-function gameEnd() { // hide canvas on game end and show try again button
-  if (outOfBounds == true) {
+function gameEnd() { // gameEnd runs repeatedly in the draw function
+  if (outOfBounds == true) { // when the ball goes out of bounds, stop the gameplay and display the end screen
     canvas.style.display = "none";
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("endScreen").style.display = "block";
     document.getElementById("gameScreen").style.display = "none";
-    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + finalScore.toString(); 
-    highScores.push(finalScore);
-    highScores.sort(function (a, b) { return a - b });
-    highScores.reverse();
-    document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:' + highScores[0] + highScores[1] + highScores[2] + highScores[3] + highScores[4];
-    console.log(highScores);
+    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + finalScore.toString();
+    doHighScores(); // update the high score list
   }
 }
 
-function rulesButton() {
+function rulesButton() { // when the rule button is clicked, display the rule screen
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("ruleScreen").style.display = "block";
-  ball.collider = 'static';
+  ball.collider = 'static'; // these are needed, otherwise the game runs behind the rule screen
   platformStart.velocity.y = 0; platforms.velocity.y = 0;
 }
 
-function countScore() {
-  finalScore += 1;
+function countScore() { // function that counts the score, runs while the gameplay is ongoing
+  finalScore += 1; // score and final score are two different variables to make printing the final score easier
   score += 1;
   document.getElementsByClassName('score')[0].innerHTML = 'Score: ' + score.toString();
 }
 
-function printHighScores() {
-  
+function doHighScores() {
+  if (finalScore > highScores[4]) { // Check if the final score is higher than the lowest score in the top five
+    highScores.push(finalScore);  // Add the new score to the list
+    highScores.sort(function (a, b) { return b - a }); // Sort the scores in descending order
+    highScores = Array.from(new Set(highScores)).slice(0, 5); // Remove duplicates and keep only the top five scores
+    document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:' + highScores.join(' '); // Display the updated high scores
+    storedScores = highScores; // Update storedScores for future use
+    storeItem('storedScores', storedScores);
+  } else {
+    document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:<br>' + highScores.join('<br>');// If the score is not in the top five, display the existing high scores
+  }
 }
 
 // to do
