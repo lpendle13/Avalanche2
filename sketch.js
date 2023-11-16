@@ -33,15 +33,13 @@ function setup() {
 function draw() {
   background(100); 
   startGame(); // switch to button later
-  if (mouse.presses()) { // starts game movement
+  if (gameStart == true) { // starts game movement and score counting
     ball.collider = 'dynamic';
     platformStart.velocity.y = -1; platforms.velocity.y = -1; 
+    countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
     restartGame();
-  }
-  if (gameStart === true) { // while the game is ongoing, count the score
-    countScore();
   }
   gameEnd();
 }
