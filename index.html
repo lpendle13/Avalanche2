@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch</title>
 
-  <title>Sketch</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
 
-  <script src="libraries/p5.min.js"></script>
-  <script src="libraries/p5.sound.min.js"></script>
+    <script src="https://p5play.org/v3/p5play.js"></script>
+    <script src="https://p5play.org/v3/planck.min.js"></script>
+    
+  </head>
 
-  <script src="https://p5play.org/v3/p5play.js"></script>
-  <script src="https://p5play.org/v3/planck.min.js"></script>
-
-</head>
-
+ 
 <body onload="onOpen()">
   <script src="sketch.js"></script>
 
@@ -41,6 +41,7 @@
   <div id="endScreen">
     <h2 class="finalScore"></h2>
     <h2 class="highScores"></h2>
+    <button id="resetScores" onClick="resetHighScores()">Reset scores</button>
     <button id="restart" onClick="startButton()">Try again</button>
     <button id="homeButton" onClick="homeButton()">Main menu</button>
   </div>
@@ -48,5 +49,4 @@
     <h1 class="score">score bar goes here</h1>
   </div>
 </body>
-
 </html>

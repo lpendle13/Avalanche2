@@ -3,18 +3,11 @@ let gameStart = false;
 let score = 0;
 let finalScore = 0;
 let highScores = ['','','','',''];
-highScores.length = 4;
 let storedScores = [];
 
 function setup() {
   createCanvas(600, 800);
-	world.gravity.y = 10;
-
-  storedScores = getItem('storedScores');
-  if (storedScores) { // If there are stored scores, use them instead of the default high scores
-    highScores = storedScores;
-  }
-  highScores.sort(function (a, b) { return b - a });
+	world.gravity.y = 15;
 
   platforms = new Group(); // set up platform details
   platforms.collider = 'kinematic'; // platforms move by programming, not by collision
@@ -66,7 +59,7 @@ function drawPlatforms() { // separate function, can be used with start button l
   }
 }
 
-function boundaryCheck() { 
+function boundaryCheck() { // what happens when ball goes out of bounds
   if (ball.x > canvas.w || ball.x < 0 || ball.y > canvas.h || ball.y < 0) { // check position of ball relative to canvas dimensions
     platformStart.velocity.y = 0; platforms.velocity.y = 0; // stops platform movement
     ball.remove(); // remove out of bounds ball
@@ -122,13 +115,14 @@ function gameEnd() { // hide canvas on game end and show try again button
   }
 }
 
-function rulesButton() {
+function rulesButton() { 
+  canvas.style.display="none";
   document.getElementById("startScreen").style.display="none";
+  document.getElementById("endScreen").style.display="none";
   document.getElementById("ruleScreen").style.display="block";
   ball.collider = 'static';
   platformStart.velocity.y = 0; platforms.velocity.y = 0; 
 }
-
 
 function countScore() { // function that counts the score, runs while the gameplay is ongoing
   finalScore += 1; // score and final score are two different variables to make printing the final score easier
@@ -137,18 +131,18 @@ function countScore() { // function that counts the score, runs while the gamepl
 }
 
 function doHighScores() {
-  if (finalScore > 0) { // Check if the final score is higher than the lowest score in the top five
     highScores.push(finalScore);  // Add the new score to the list
     highScores.sort(function (a, b) { return b - a }); // Sort the scores in descending order
     highScores = Array.from(new Set(highScores)).slice(0, 5); // Remove duplicates and keep only the top five scores
     document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:<br>' + highScores.join('<br>'); // Display the updated high scores
     storedScores = highScores; // Update storedScores for future use
     storeItem('storedScores', storedScores);
-  } else {
-    document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:<br>' + highScores.join('<br>');// If the score is not in the top five, display the existing high scores
   }
-}
 
+function resetHighScores() { // // reset the stored scores and high score list
+  highScores.length=0; // removes all prior scores
+  doHighScores(); // resets high score list to only show the most recent score
+}
 
 // to do
 // visuals
