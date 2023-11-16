@@ -2,12 +2,13 @@ let outOfBounds = false;
 let gameStart = false;
 let score = 0;
 let finalScore = 0;
-let highScores = [400, 100, 3000, 1000, 5000];
+let highScores = ['','','','',''];
+highScores.length = 4;
 let storedScores = [];
 
 function setup() {
   createCanvas(600, 800);
-	world.gravity.y = 20;
+	world.gravity.y = 10;
 
   storedScores = getItem('storedScores');
   if (storedScores) { // If there are stored scores, use them instead of the default high scores
@@ -136,7 +137,7 @@ function countScore() { // function that counts the score, runs while the gamepl
 }
 
 function doHighScores() {
-  if (finalScore > highScores[4]) { // Check if the final score is higher than the lowest score in the top five
+  if (finalScore > 0) { // Check if the final score is higher than the lowest score in the top five
     highScores.push(finalScore);  // Add the new score to the list
     highScores.sort(function (a, b) { return b - a }); // Sort the scores in descending order
     highScores = Array.from(new Set(highScores)).slice(0, 5); // Remove duplicates and keep only the top five scores
