@@ -9,6 +9,11 @@ function setup() {
   createCanvas(600, 800);
 	world.gravity.y = 15;
 
+  storedScores = getItem('storedScores');
+  if (storedScores) { // If there are stored scores, use them instead of the default high scores
+    highScores = storedScores;
+  }
+
   platforms = new Group(); // set up platform details
   platforms.collider = 'kinematic'; // platforms move by programming, not by collision
   platforms.x = () => random(0, canvas.w); // randomize horizontal placement of platforms
@@ -108,7 +113,7 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("startScreen").style.display="none";
     document.getElementById("endScreen").style.display="block";
     document.getElementById("gameScreen").style.display = "none";
-    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + finalScore.toString();
+    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
   }
 }
@@ -123,13 +128,14 @@ function rulesButton() {
 }
 
 function countScore() { // function that counts the score, runs while the gameplay is ongoing
-  finalScore += 1; // score and final score are two different variables to make printing the final score easier
-  score += 1;
-  document.getElementsByClassName('score')[0].innerHTML = 'Score: ' + score.toString();
+  finalScore += .1; // score and final score are two different variables to make printing the final score easier
+  score += .1;
+  document.getElementsByClassName('score')[0].innerHTML = 'Score: ' + Math.floor(score).toString();
+
 }
 
 function doHighScores() {
-    highScores.push(finalScore);  // Add the new score to the list
+    highScores.push(Math.floor(finalScore));  // Add the new score to the list
     highScores.sort(function (a, b) { return b - a }); // Sort the scores in descending order
     highScores = Array.from(new Set(highScores)).slice(0, 5); // Remove duplicates and keep only the top five scores
     document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:<br>' + highScores.join('<br>'); // Display the updated high scores
