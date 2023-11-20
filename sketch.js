@@ -8,6 +8,7 @@ let storedScores = [];
 function setup() {
   createCanvas(600, 800);
 	world.gravity.y = 15;
+  frameRate(40); // fix lagging
 
   storedScores = getItem('storedScores');
   if (storedScores) { // If there are stored scores, use them instead of the default high scores
