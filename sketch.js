@@ -2,8 +2,10 @@ let outOfBounds = false;
 let gameStart = false;
 let score = 0;
 let finalScore = 0;
-let highScores = ['','','','',''];
+let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
+let bSprite = 'assets/test-ball.png';
+
 
 function setup() {
   createCanvas(600, 800);
@@ -32,6 +34,7 @@ function setup() {
   platformStart.velocity.y = 0; 
   
   ball = new Sprite(canvas.w/2,canvas.h-200,50); // create ball above first platform
+  ball.img = bSprite;
   ball.collider = 'static';
   ball.bounciness = 0.3;
 }
@@ -40,6 +43,7 @@ function draw() {
   background(100); 
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
+    ball.img = bSprite;
     ball.collider = 'dynamic';
     platformStart.velocity.y = -1; platforms.velocity.y = -1; 
     countScore();
@@ -104,6 +108,17 @@ function homeButton() { // allow button to navigate to main menu
   document.getElementById("startScreen").style.display="block";
   document.getElementById("endScreen").style.display="none";
   document.getElementById("ruleScreen").style.display="none";
+  document.getElementById("selectScreen").style.display="none";
+  ball.collider = 'static';
+  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+}
+
+function charButton() {
+  canvas.style.display="none";
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("endScreen").style.display="none";
+  document.getElementById("ruleScreen").style.display="none";
+  document.getElementById("selectScreen").style.display="block";
   ball.collider = 'static';
   platformStart.velocity.y = 0; platforms.velocity.y = 0; 
 }
@@ -149,6 +164,15 @@ function resetHighScores() { // // reset the stored scores and high score list
   doHighScores(); // resets high score list to only show the most recent score
 }
 
+function ballButton1 () {
+  bSprite = 'assets/test-ball.png';
+  ball.img = bSprite;
+}
+
+function ballButton2 () {
+  bSprite = 'assets/test-ball2.png';
+  ball.img = bSprite;
+}
 // to do
 // visuals
 // test platform spacing, gravity, velocity, etc
