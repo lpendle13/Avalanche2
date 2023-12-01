@@ -5,8 +5,7 @@ let finalScore = 0;
 let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
 let bSprite = 'assets/test-ball.png';
-let leftPress = false;
-let rightPress = false;
+
 
 function setup() {
   createCanvas(600, 800);
@@ -25,7 +24,6 @@ function setup() {
   platforms.w = 200;
   platforms.h = 15;
   platforms.velocity.y = 0; // control speed of platforms; larger = faster
-  platforms.rotationSpeed = 0;
 
   platformStart = new Group(); // create first platform in center position
   platformStart.collider = 'kinematic';
@@ -34,7 +32,6 @@ function setup() {
   platformStart.w = 200;
   platformStart.h = 15;
   platformStart.velocity.y = 0; 
-  platformStart.rotationSpeed = 0;
   
   ball = new Sprite(canvas.w/2,canvas.h-200,50); // create ball above first platform
   ball.img = bSprite;
@@ -61,33 +58,14 @@ function drawPlatforms() { // separate function, can be used with start button l
   new platforms.Sprite(); // draw platforms to canvas
   new platformStart.Sprite(); // draw first platform to canvas
   platformStart.amount = 1; // only draw one starting platform
-  // if (kb.pressing('left')) {
-  //   platformStart.rotationSpeed = -1; platforms.rotationSpeed = -1;
-	// } else if (kb.pressing('right')) {
-  //   platformStart.rotationSpeed = 1; platforms.rotationSpeed = 1;
-	// } else {
-  //   platformStart.rotationSpeed = 0; platforms.rotationSpeed = 0;
-  // }
-
-  if (kb.pressing('left') && kb.left <= 10) {
-    platformStart.rotationSpeed = -1; platforms.rotationSpeed = -1;
-	} else if (kb.released('left')) {
-    platformStart.rotationSpeed = 10; platforms.rotationSpeed = 10;
-  } else if (kb.pressing('right') && kb.right <= 10) {
-    platformStart.rotationSpeed = 1; platforms.rotationSpeed = 1;
-  } else if (kb.released('right')) {
-    platformStart.rotationSpeed = -10; platforms.rotationSpeed = -10;
-	} else if (kb.left > 10 || kb.right > 10) {
-    platformStart.rotationSpeed = 0; platforms.rotationSpeed = 0;
-  } else {
-    platformStart.rotationSpeed = 0; platforms.rotationSpeed = 0;
-
+  if (kb.pressing('left')) {
+    platformStart.rotation = -15; platforms.rotation = -15;
+	} else if (kb.pressing('right')) {
+    platformStart.rotation = 15; platforms.rotation = 15;
+	} else {
+    platformStart.rotation = 0; platforms.rotation = 0;
   }
-
-
 }
-
-
 
 function boundaryCheck() { // what happens when ball goes out of bounds
   if (ball.x > canvas.w || ball.x < 0 || ball.y > canvas.h || ball.y < 0) { // check position of ball relative to canvas dimensions
@@ -135,7 +113,7 @@ function homeButton() { // allow button to navigate to main menu
   platformStart.velocity.y = 0; platforms.velocity.y = 0; 
 }
 
-function charButton() { // allow button to navigate to character select
+function charButton() {
   canvas.style.display="none";
   document.getElementById("startScreen").style.display="none";
   document.getElementById("endScreen").style.display="none";
@@ -156,7 +134,7 @@ function gameEnd() { // hide canvas on game end and show try again button
   }
 }
 
-function rulesButton() { // allow button to navigate to rules
+function rulesButton() { 
   canvas.style.display="none";
   document.getElementById("startScreen").style.display="none";
   document.getElementById("endScreen").style.display="none";
@@ -195,7 +173,6 @@ function ballButton2 () {
   bSprite = 'assets/test-ball2.png';
   ball.img = bSprite;
 }
-
 // to do
 // visuals
 // test platform spacing, gravity, velocity, etc
