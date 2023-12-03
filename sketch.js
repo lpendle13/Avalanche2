@@ -4,7 +4,8 @@ let score = 0;
 let finalScore = 0;
 let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
-let bSprite = 'assets/test-ball.png';
+let bSprite = 'assets/snowball.png';
+let platImg = 'assets/snow-platform.png';
 
 
 function setup() {
@@ -18,6 +19,7 @@ function setup() {
   }
 
   platforms = new Group(); // set up platform details
+  platforms.img = platImg;
   platforms.collider = 'kinematic'; // platforms move by programming, not by collision
   platforms.x = () => random(0, canvas.w); // randomize horizontal placement of platforms
   platforms.y = (i) => canvas.h + i * 125; // control vertical spacing of platforms
@@ -26,6 +28,7 @@ function setup() {
   platforms.velocity.y = 0; // control speed of platforms; larger = faster
 
   platformStart = new Group(); // create first platform in center position
+  platformStart.img = platImg;
   platformStart.collider = 'kinematic';
   platformStart.x = canvas.w/2; // sets first platform at center horizontally
   platformStart.y = canvas.h-125; // sets first platform vertically with same spacing
@@ -165,7 +168,7 @@ function resetHighScores() { // // reset the stored scores and high score list
 }
 
 function ballButton1 () {
-  bSprite = 'assets/test-ball.png';
+  bSprite = 'assets/snowball.png';
   ball.img = bSprite;
 }
 
@@ -174,6 +177,7 @@ function ballButton2 () {
   ball.img = bSprite;
 }
 // to do
+// feedback for char select
 // visuals
 // test platform spacing, gravity, velocity, etc
 // whatever else we want
