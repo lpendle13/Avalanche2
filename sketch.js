@@ -6,10 +6,14 @@ let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
 let bSprite = 'assets/snowball.png';
 let platImg = 'assets/snow-platform.png';
+let snowBg;
 
+function preload() {
+  snowBg = loadImage('assets/snow-bg.png')
+}
 
 function setup() {
-  createCanvas(600, 800);
+  createCanvas(600, 1000);
 	world.gravity.y = 15;
   frameRate(40); // fix lagging
 
@@ -43,7 +47,8 @@ function setup() {
 }
 
 function draw() {
-  background(100); 
+ // background(100); 
+  background(snowBg);
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
