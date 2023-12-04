@@ -6,19 +6,23 @@ let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
 let bSprite = 'assets/snowball.png';
 let platImg = 'assets/snow-platform.png';
+let canvasBg = 'assets/snow-bg.png';
+let snowBg;
+let fireBg;
 let mainSong;
 let menuSong;
 
 function preload() {
+  snowBg = loadImage('assets/snow-bg.png')
+  fireBg = loadImage('assets/fire-bg.png');
   mainSong = loadSound('assets/icebreaker-main.mp3');
   menuSong = loadSound('assets/icebreaker-menu.mp3');
 }
 
 function setup() {
-  createCanvas(600, 800);
+  createCanvas(600, 1000);
 	world.gravity.y = 15;
   frameRate(40); // fix lagging
-
 
   storedScores = getItem('storedScores');
   if (storedScores) { // If there are stored scores, use them instead of the default high scores
@@ -47,20 +51,21 @@ function setup() {
   ball.img = bSprite;
   ball.collider = 'static';
   ball.bounciness = 0.3;
+
   userStartAudio().then(function () {
     menuSong.play();
   });
 }
 
 function draw() {
-  background(100); 
+ // background(100); 
+  background(canvasBg); 
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
     ball.collider = 'dynamic';
     platformStart.velocity.y = -1; platforms.velocity.y = -1; 
     countScore();
-    
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
     restartGame();
@@ -106,7 +111,6 @@ function restartGame() { // restart game after losing
 
 function onOpen() { // hide try again button on open
   document.getElementById("endScreen").style.display="none";
-  
 }
 
 function startButton() { // allow button to control game start
@@ -132,8 +136,6 @@ function homeButton() { // allow button to navigate to main menu
   } else {
     menuSong.play();
   }
-  
-  
 }
 
 function charButton() {
@@ -188,18 +190,32 @@ function resetHighScores() { // // reset the stored scores and high score list
   doHighScores(); // resets high score list to only show the most recent score
 }
 
-function ballButton1 () {
+function ballButton1 () { // set assets and bg to snowy
   bSprite = 'assets/snowball.png';
   ball.img = bSprite;
+  platImg = 'assets/snow-platform.png'
+  platformStart.img = platImg;
+  platforms.img = platImg;
+  canvasBg = snowBg;
+
 }
 
-function ballButton2 () {
-  bSprite = 'assets/test-ball2.png';
+function ballButton2 () { // set assets and bg to fire
+  bSprite = 'assets/fireball2.png';
   ball.img = bSprite;
+  platImg = 'assets/fire-platform.png';
+  platformStart.img = platImg;
+  platforms.img = platImg;
+  canvasBg = fireBg;
 }
 
 // to do
+// upload high res for char select preview
+// move the score into the canvas?
 // feedback for char select
-// visuals
+// visuals. 3rd char?
+// make the html look pretty; center the canvas
+// add a cool title screen
+// graphics for rules page
 // test platform spacing, gravity, velocity, etc
 // whatever else we want
