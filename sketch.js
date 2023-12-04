@@ -4,7 +4,7 @@ let score = 0;
 let finalScore = 0;
 let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
-let bSprite = 'assets/snowball.png';
+let bSprite = 'assets/snowball.png';  // sets default theme to snowy
 let platImg = 'assets/snow-platform.png';
 let canvasBg = 'assets/snow-bg.png';
 let snowBg;
@@ -13,7 +13,7 @@ let mainSong;
 let menuSong;
 
 function preload() {
-  snowBg = loadImage('assets/snow-bg.png')
+  snowBg = loadImage('assets/snow-bg.png');
   fireBg = loadImage('assets/fire-bg.png');
   mainSong = loadSound('assets/icebreaker-main.mp3');
   menuSong = loadSound('assets/icebreaker-menu.mp3');
@@ -111,6 +111,8 @@ function restartGame() { // restart game after losing
 
 function onOpen() { // hide try again button on open
   document.getElementById("endScreen").style.display="none";
+  canvasBg = snowBg; // fix bug
+
 }
 
 function startButton() { // allow button to control game start
