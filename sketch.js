@@ -6,16 +6,19 @@ let highScores = ['100','300','500','750','1000'];
 let storedScores = [];
 let bSprite = 'assets/snowball.png';
 let platImg = 'assets/snow-platform.png';
-let snowBg;
+let mainSong;
+let menuSong;
 
 function preload() {
-  snowBg = loadImage('assets/snow-bg.png')
+  mainSong = loadSound('assets/icebreaker-main.mp3');
+  menuSong = loadSound('assets/icebreaker-menu.mp3');
 }
 
 function setup() {
-  createCanvas(600, 1000);
+  createCanvas(600, 800);
 	world.gravity.y = 15;
   frameRate(40); // fix lagging
+
 
   storedScores = getItem('storedScores');
   if (storedScores) { // If there are stored scores, use them instead of the default high scores
@@ -44,17 +47,20 @@ function setup() {
   ball.img = bSprite;
   ball.collider = 'static';
   ball.bounciness = 0.3;
+  userStartAudio().then(function () {
+    menuSong.play();
+  });
 }
 
 function draw() {
- // background(100); 
-  background(snowBg);
+  background(100); 
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
     ball.collider = 'dynamic';
     platformStart.velocity.y = -1; platforms.velocity.y = -1; 
     countScore();
+    
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
     restartGame();
@@ -100,6 +106,7 @@ function restartGame() { // restart game after losing
 
 function onOpen() { // hide try again button on open
   document.getElementById("endScreen").style.display="none";
+  
 }
 
 function startButton() { // allow button to control game start
@@ -109,6 +116,8 @@ function startButton() { // allow button to control game start
   document.getElementById("gameScreen").style.display="block";
   gameStart = true;
   finalScore = 0;
+  mainSong.play();
+  menuSong.stop();
 }
 
 function homeButton() { // allow button to navigate to main menu
@@ -119,6 +128,12 @@ function homeButton() { // allow button to navigate to main menu
   document.getElementById("selectScreen").style.display="none";
   ball.collider = 'static';
   platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+  if (menuSong.isPlaying()){
+  } else {
+    menuSong.play();
+  }
+  
+  
 }
 
 function charButton() {
@@ -139,6 +154,7 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("gameScreen").style.display = "none";
     document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
+    mainSong.stop();
   }
 }
 
@@ -181,6 +197,7 @@ function ballButton2 () {
   bSprite = 'assets/test-ball2.png';
   ball.img = bSprite;
 }
+
 // to do
 // feedback for char select
 // visuals
