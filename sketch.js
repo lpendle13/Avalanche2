@@ -11,6 +11,7 @@ let snowBg;
 let fireBg;
 let mainSong;
 let menuSong;
+let speed = -1;
 
 function preload() {
   snowBg = loadImage('assets/snow-bg.png');
@@ -64,7 +65,7 @@ function draw() {
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
     ball.collider = 'dynamic';
-    platformStart.velocity.y = -1; platforms.velocity.y = -1; 
+    platformStart.velocity.y = speed; platforms.velocity.y = speed; 
     countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
@@ -123,6 +124,9 @@ function startButton() { // allow button to control game start
   finalScore = 0;
   mainSong.play();
   menuSong.stop();
+  if (canvasBg === fireBg) {
+    speed = -2;
+  }
 }
 
 function homeButton() { // allow button to navigate to main menu
@@ -155,7 +159,7 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("startScreen").style.display="none";
     document.getElementById("endScreen").style.display="block";
     document.getElementById("gameScreen").style.display = "none";
-    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
+    document.getElementsByClassName('finalScore')[0].innerHTML = 'Game Over! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
     mainSong.stop();
   }
@@ -205,6 +209,7 @@ function ballButton1 () { // set assets and bg to snowy
   document.getElementById("ballButton2").style.color = "black";
   ball.bounciness = .3;
   world.gravity.y = 15;
+  speed = -1;
 }
 
 function ballButton2 () { // set assets and bg to fire
@@ -216,7 +221,6 @@ function ballButton2 () { // set assets and bg to fire
   canvasBg = fireBg;
   document.getElementById("ballButton1").style.color = "black";
   document.getElementById("ballButton2").style.color = "red"; // style as selected
-  ball.bounciness = .8;
   world.gravity.y = 30;
 }
 
