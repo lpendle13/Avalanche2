@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketch</title>
+    <title>Avalanche 2</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -18,44 +18,52 @@
 
  
 <body onload="onOpen()">
-  <script src="sketch.js"></script>
-
+  <div id="gameScreen">
+    <script src="sketch.js"></script>
+  </div>
   <div id="startScreen">
-    <div id="instructions">
       <h1 id="mainTitle">Avalanche 2</h1>
-      <button onClick="startButton()">Play</button>
-      <button onClick="rulesButton()">Rules</button>
-      <button onClick="charButton()">Character Select</button>
-    </div>
+      <button class="buttons" onClick="startButton()">Play</button>
+      <br>
+      <button class="buttons" onClick="rulesButton()">Rules</button>
+      <br>
+      <button class="buttons" onClick="charButton()">Character Select</button>
   </div>
   <div id="ruleScreen">
-    <p id="instruction">
-      <br>
-    <p id="textA"> At the start of the game the snowball appears on one of the platforms you control.</p>
+    <h2>How To Play</h2>
+    <p id="instructions">
     <br>
-    <p id="textB"> With the controls, change the angle of the platform to move the snowball around.</p>
+    <p id="textA"> At the start of the game the ball appears on one of the platforms you control.</p>
     <br>
-    <p id="textC"> Try your best to keep the snowball from hitting the edge of the screen as long as you can.</p>
+    <p id="textB"> With the left and right arrow keys, change the angle of the platform to move the ball around.</p>
+    <br>
+    <p id="textC"> Try your best to keep the ball from hitting the edge of the screen as long as you can.</p>
     </p>
-    <button id="homeButton" onClick="homeButton()">Main menu</button>
+    <button id="homeButton" class="buttons" onClick="homeButton()">Main Menu</button>
   </div>
   <div id="endScreen">
     <h2 class="finalScore"></h2>
-    <h2 class="highScores"></h2>
-    <button id="resetScores" onClick="resetHighScores()">Reset scores</button>
-    <button id="restart" onClick="startButton()">Try again</button>
-    <button id="homeButton" onClick="homeButton()">Main menu</button>
+    <h3 class="highScores"></h3>
+    <button id="resetScores" class="buttons" onClick="resetHighScores()">Reset Scores</button>
+    <br>
+    <button id="restart" class="buttons" onClick="startButton()">Try Again</button>
+    <br>
+    <button id="homeButton" class="buttons" onClick="homeButton()">Main Menu</button>
+    <br>
   </div>
-  <div id="gameScreen">
-    <h1 class="score">score bar goes here</h1>
-  </div>
+  
   <div id="selectScreen">
-    <p>Choose a character</p><br>
-    <img src='assets/snowball.png' onclick="ballButton1()" alt="snowball" style="width: 100px; height: 100px; cursor: pointer;">
-    <img src='assets/fireball2.png' onclick="ballButton2()" alt="fireball" style="width: 100px; height: 100px; cursor: pointer;"><br>
-    <button id="ballButton1" onClick="ballButton1()" style="width: 100px;">Select Ball 1</button>
-    <button id="ballButton2" onClick="ballButton2()" style="width: 100px;">Select Ball 2</button>
-    <button id="homeButton" onClick="homeButton()">Main menu</button>
+    <h2>Choose A Theme</h2>
+    <br>
+    <img id="snowball" src='assets/snowball-highres.png' onclick="ballButton1()" alt="snowball">
+    <img id="fireball" src='assets/fireball-highres.png' onclick="ballButton2()" alt="fireball">
+    <br>
+    <button id="ballButton1" class="buttons" onClick="ballButton1()">Snowball</button>
+    <button id="ballButton2" class="buttons" onClick="ballButton2()">Fireball</button>
+    <br>
+    <button id="homePage" class="buttons" onClick="homeButton()">Main Menu</button>
+    <br>
   </div>
+   <p id="p5_loading" class="loadingclass"></p> <!--hides the loading... text-->
 </body>
 </html>

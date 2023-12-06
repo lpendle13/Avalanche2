@@ -111,8 +111,7 @@ function restartGame() { // restart game after losing
 
 function onOpen() { // hide try again button on open
   document.getElementById("endScreen").style.display="none";
-  canvasBg = snowBg; // fix bug
-
+  canvasBg = snowBg;
 }
 
 function startButton() { // allow button to control game start
@@ -174,8 +173,11 @@ function rulesButton() {
 function countScore() { // function that counts the score, runs while the gameplay is ongoing
   finalScore += .1; // score and final score are two different variables to make printing the final score easier
   score += .1;
-  document.getElementsByClassName('score')[0].innerHTML = 'Score: ' + Math.floor(score).toString();
-
+  noStroke();
+  fill(255);
+  let fontsize=50;
+  textSize(fontsize);
+  text('Score: ' + Math.floor(score).toString(),10,50);
 }
 
 function doHighScores() {
@@ -199,25 +201,27 @@ function ballButton1 () { // set assets and bg to snowy
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = snowBg;
+  document.getElementById("ballButton1").style.color = "red"; // style as selected
+  document.getElementById("ballButton2").style.color = "black";
 
 }
 
 function ballButton2 () { // set assets and bg to fire
-  bSprite = 'assets/fireball2.png';
+  bSprite = 'assets/fireball.png';
   ball.img = bSprite;
   platImg = 'assets/fire-platform.png';
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = fireBg;
+  document.getElementById("ballButton1").style.color = "black";
+  document.getElementById("ballButton2").style.color = "red"; // style as selected
+
 }
 
 // to do
-// upload high res for char select preview
-// move the score into the canvas?
-// feedback for char select
+// style the buttons
+// choose a font
+// audio control buttons
 // visuals. 3rd char?
-// make the html look pretty; center the canvas
 // add a cool title screen
-// graphics for rules page
 // test platform spacing, gravity, velocity, etc
-// whatever else we want
