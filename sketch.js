@@ -203,7 +203,8 @@ function ballButton1 () { // set assets and bg to snowy
   canvasBg = snowBg;
   document.getElementById("ballButton1").style.color = "red"; // style as selected
   document.getElementById("ballButton2").style.color = "black";
-
+  ball.bounciness = .3;
+  world.gravity.y = 15;
 }
 
 function ballButton2 () { // set assets and bg to fire
@@ -215,7 +216,8 @@ function ballButton2 () { // set assets and bg to fire
   canvasBg = fireBg;
   document.getElementById("ballButton1").style.color = "black";
   document.getElementById("ballButton2").style.color = "red"; // style as selected
-
+  ball.bounciness = .8;
+  world.gravity.y = 30;
 }
 
 // to do
