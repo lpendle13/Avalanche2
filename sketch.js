@@ -12,12 +12,14 @@ let fireBg;
 let mainSong;
 let menuSong;
 let speed = -1;
+let snowFont;
 
 function preload() {
   snowBg = loadImage('assets/snow-bg.png');
   fireBg = loadImage('assets/fire-bg.png');
   mainSong = loadSound('assets/icebreaker-main.mp3');
   menuSong = loadSound('assets/icebreaker-menu.mp3');
+  snowFont = loadFont('assets/SnowtopCaps.otf');
 }
 
 function setup() {
@@ -65,7 +67,7 @@ function draw() {
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
     ball.collider = 'dynamic';
-    platformStart.velocity.y = speed; platforms.velocity.y = speed; 
+    platformStart.velocity.y = -1; platforms.velocity.y = -1; 
     countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
@@ -159,7 +161,7 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("startScreen").style.display="none";
     document.getElementById("endScreen").style.display="block";
     document.getElementById("gameScreen").style.display = "none";
-    document.getElementsByClassName('finalScore')[0].innerHTML = 'Game Over! Score: ' + Math.floor(finalScore).toString();
+    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
     mainSong.stop();
   }
@@ -181,6 +183,7 @@ function countScore() { // function that counts the score, runs while the gamepl
   fill(255);
   let fontsize=50;
   textSize(fontsize);
+  textFont(snowFont);
   text('Score: ' + Math.floor(score).toString(),10,50);
 }
 
@@ -198,21 +201,37 @@ function resetHighScores() { // // reset the stored scores and high score list
   doHighScores(); // resets high score list to only show the most recent score
 }
 
-function ballButton1 () { // set assets and bg to snowy
+function ballButton1() { // set assets and bg to beach
+  bSprite = 'assets/beachball.png';
+  ball.img = bSprite;
+  platImg = 'assets/sand-platform.png'
+  platformStart.img = platImg;
+  platforms.img = platImg;
+//  canvasBg = testBg; add back when bg exists
+  document.getElementById("ballButton1").style.color = "red"; // style as selected
+  document.getElementById("ballButton2").style.color = "black";
+  document.getElementById("ballButton3").style.color = "black";
+  ball.bounciness = .3;
+  world.gravity.y = 15;
+  speed = -1;
+
+}
+function ballButton2() { // set assets and bg to snowy
   bSprite = 'assets/snowball.png';
   ball.img = bSprite;
   platImg = 'assets/snow-platform.png'
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = snowBg;
-  document.getElementById("ballButton1").style.color = "red"; // style as selected
-  document.getElementById("ballButton2").style.color = "black";
+  document.getElementById("ballButton1").style.color = "black"; 
+  document.getElementById("ballButton2").style.color = "red"; // style as selected
+  document.getElementById("ballButton3").style.color = "black";
   ball.bounciness = .3;
   world.gravity.y = 15;
   speed = -1;
-}
 
-function ballButton2 () { // set assets and bg to fire
+}
+function ballButton3() { // set assets and bg to fire
   bSprite = 'assets/fireball.png';
   ball.img = bSprite;
   platImg = 'assets/fire-platform.png';
@@ -220,7 +239,8 @@ function ballButton2 () { // set assets and bg to fire
   platforms.img = platImg;
   canvasBg = fireBg;
   document.getElementById("ballButton1").style.color = "black";
-  document.getElementById("ballButton2").style.color = "red"; // style as selected
+  document.getElementById("ballButton2").style.color = "black";
+  document.getElementById("ballButton3").style.color = "red"; // style as selected
   world.gravity.y = 30;
 }
 
