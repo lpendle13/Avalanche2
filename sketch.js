@@ -46,7 +46,7 @@ function setup() {
   platforms.w = 200;
   platforms.h = 15;
   platforms.velocity.y = 0; // control speed of platforms; larger = faster
-  platforms.amount = 100;
+  //platforms.amount = 100;
 
   platformStart = new Group(); // create first platform in center position
   platformStart.img = platImg;
@@ -68,13 +68,12 @@ function setup() {
 }
 
 function draw() {
-  renderStats();
   background(canvasBg); 
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
-    ball.collider = 'dynamic'; // change to dynamic once bug is fixed
-    platformStart.velocity.y = speed; platforms.velocity.y = speed; // change to -1 after fix
+    ball.collider = 'dynamic'; 
+    platformStart.velocity.y = speed; platforms.velocity.y = speed;
     countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
@@ -94,6 +93,13 @@ function drawPlatforms() { // separate function, can be used with start button l
 	} else {
     platformStart.rotation = 0; platforms.rotation = 0;
   }
+  for (let i = 0; i < platforms.length; i++) {
+    let platform = platforms[i];
+
+    if (platform.position.y < 10) {
+      platform.remove();
+    }
+  }
 }
 
 function boundaryCheck() { // what happens when ball goes out of bounds
@@ -103,6 +109,8 @@ function boundaryCheck() { // what happens when ball goes out of bounds
     outOfBounds = true;
     gameStart = false;
     score = 0;
+    platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+
   }
 }
 
@@ -176,16 +184,22 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("startScreen").style.display="none";
     document.getElementById("endScreen").style.display="block";
     document.getElementById("gameScreen").style.display = "none";
-    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
+    document.getElementsByClassName('finalScore')[0].innerHTML = 'Game Over! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
     if (canvasBg === fireBg) {
       fireSong.stop();
+      platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+
     }
     if (canvasBg === beachBg) {
       beachSong.stop();
+      platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+
     }
     if (canvasBg === snowBg){
       mainSong.stop();
+      platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+
     }
   }
 }
@@ -239,7 +253,6 @@ function ballButton1() { // set assets and bg to beach
   speed = -0.8;
 
 }
-
 function ballButton2() { // set assets and bg to snowy
   bSprite = 'assets/snowball.png';
   ball.img = bSprite;
@@ -255,7 +268,6 @@ function ballButton2() { // set assets and bg to snowy
   speed = -1;
 
 }
-
 function ballButton3() { // set assets and bg to fire
   bSprite = 'assets/fireball.png';
   ball.img = bSprite;
