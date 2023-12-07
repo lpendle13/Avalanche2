@@ -2,7 +2,7 @@ let outOfBounds = false;
 let gameStart = false;
 let score = 0;
 let finalScore = 0;
-let highScores = ['100','300','500','750','1000'];
+let highScores = ['100', '200', '300', '400', '500'];
 let storedScores = [];
 let bSprite = 'assets/snowball.png';  // sets default theme to snowy
 let platImg = 'assets/snow-platform.png';
@@ -26,7 +26,7 @@ function preload() {
 
 function setup() {
   createCanvas(600, 1000);
-	world.gravity.y = 15;
+  world.gravity.y = 15;
   frameRate(40); // fix lagging
 
   storedScores = getItem('storedScores');
@@ -46,13 +46,13 @@ function setup() {
   platformStart = new Group(); // create first platform in center position
   platformStart.img = platImg;
   platformStart.collider = 'kinematic';
-  platformStart.x = canvas.w/2; // sets first platform at center horizontally
-  platformStart.y = canvas.h-125; // sets first platform vertically with same spacing
+  platformStart.x = canvas.w / 2; // sets first platform at center horizontally
+  platformStart.y = canvas.h - 125; // sets first platform vertically with same spacing
   platformStart.w = 200;
   platformStart.h = 15;
-  platformStart.velocity.y = 0; 
-  
-  ball = new Sprite(canvas.w/2,canvas.h-200,50); // create ball above first platform
+  platformStart.velocity.y = 0;
+
+  ball = new Sprite(canvas.w / 2, canvas.h - 200, 50); // create ball above first platform
   ball.img = bSprite;
   ball.collider = 'static';
   ball.bounciness = 0.3;
@@ -63,13 +63,13 @@ function setup() {
 }
 
 function draw() {
- // background(100); 
-  background(canvasBg); 
+  // background(100); 
+  background(canvasBg);
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
     ball.collider = 'dynamic';
-    platformStart.velocity.y = speed; platforms.velocity.y = speed; 
+    platformStart.velocity.y = speed; platforms.velocity.y = speed;
     countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
@@ -77,16 +77,16 @@ function draw() {
   }
   gameEnd();
 }
-  
+
 function drawPlatforms() { // separate function, can be used with start button later
   new platforms.Sprite(); // draw platforms to canvas
   new platformStart.Sprite(); // draw first platform to canvas
   platformStart.amount = 1; // only draw one starting platform
   if (kb.pressing('left')) {
     platformStart.rotation = -15; platforms.rotation = -15;
-	} else if (kb.pressing('right')) {
+  } else if (kb.pressing('right')) {
     platformStart.rotation = 15; platforms.rotation = 15;
-	} else {
+  } else {
     platformStart.rotation = 0; platforms.rotation = 0;
   }
 }
@@ -108,22 +108,22 @@ function startGame() { // control when game starts running
 
 function restartGame() { // restart game after losing
   allSprites.remove(); // clear previous platforms
-  ball = new Sprite(canvas.w/2,canvas.h-200,50); // redraw ball to starting position
+  ball = new Sprite(canvas.w / 2, canvas.h - 200, 50); // redraw ball to starting position
   platformStart.velocity.y = speed; platforms.velocity.y = speed; // start platform movement
   outOfBounds = false;
   startGame();
 }
 
 function onOpen() { // hide try again button on open
-  document.getElementById("endScreen").style.display="none";
+  document.getElementById("endScreen").style.display = "none";
   canvasBg = snowBg;
 }
 
 function startButton() { // allow button to control game start
-  canvas.style.display="block";
-  document.getElementById("startScreen").style.display="none";
-  document.getElementById("endScreen").style.display="none";
-  document.getElementById("gameScreen").style.display="block";
+  canvas.style.display = "block";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("endScreen").style.display = "none";
+  document.getElementById("gameScreen").style.display = "block";
   gameStart = true;
   finalScore = 0;
   mainSong.play();
@@ -138,34 +138,34 @@ function startButton() { // allow button to control game start
 }
 
 function homeButton() { // allow button to navigate to main menu
-  canvas.style.display="none";
-  document.getElementById("startScreen").style.display="block";
-  document.getElementById("endScreen").style.display="none";
-  document.getElementById("ruleScreen").style.display="none";
-  document.getElementById("selectScreen").style.display="none";
+  canvas.style.display = "none";
+  document.getElementById("startScreen").style.display = "block";
+  document.getElementById("endScreen").style.display = "none";
+  document.getElementById("ruleScreen").style.display = "none";
+  document.getElementById("selectScreen").style.display = "none";
   ball.collider = 'static';
-  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
-  if (menuSong.isPlaying()){
+  platformStart.velocity.y = 0; platforms.velocity.y = 0;
+  if (menuSong.isPlaying()) {
   } else {
     menuSong.play();
   }
 }
 
 function charButton() {
-  canvas.style.display="none";
-  document.getElementById("startScreen").style.display="none";
-  document.getElementById("endScreen").style.display="none";
-  document.getElementById("ruleScreen").style.display="none";
-  document.getElementById("selectScreen").style.display="block";
+  canvas.style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("endScreen").style.display = "none";
+  document.getElementById("ruleScreen").style.display = "none";
+  document.getElementById("selectScreen").style.display = "block";
   ball.collider = 'static';
-  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+  platformStart.velocity.y = 0; platforms.velocity.y = 0;
 }
 
 function gameEnd() { // hide canvas on game end and show try again button
   if (outOfBounds == true) {
-    canvas.style.display="none";
-    document.getElementById("startScreen").style.display="none";
-    document.getElementById("endScreen").style.display="block";
+    canvas.style.display = "none";
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("endScreen").style.display = "block";
     document.getElementById("gameScreen").style.display = "none";
     document.getElementsByClassName('finalScore')[0].innerHTML = 'Game Over! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
@@ -173,13 +173,13 @@ function gameEnd() { // hide canvas on game end and show try again button
   }
 }
 
-function rulesButton() { 
-  canvas.style.display="none";
-  document.getElementById("startScreen").style.display="none";
-  document.getElementById("endScreen").style.display="none";
-  document.getElementById("ruleScreen").style.display="block";
+function rulesButton() {
+  canvas.style.display = "none";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("endScreen").style.display = "none";
+  document.getElementById("ruleScreen").style.display = "block";
   ball.collider = 'static';
-  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+  platformStart.velocity.y = 0; platforms.velocity.y = 0;
 }
 
 function countScore() { // function that counts the score, runs while the gameplay is ongoing
@@ -187,23 +187,23 @@ function countScore() { // function that counts the score, runs while the gamepl
   score += .1;
   noStroke();
   fill(255);
-  let fontsize=50;
+  let fontsize = 50;
   textSize(fontsize);
-  textFont(snowFont); 
-  text('Score: ' + Math.floor(score).toString(),10,50);
+  textFont(snowFont);
+  text('Score: ' + Math.floor(score).toString(), 10, 50);
 }
 
 function doHighScores() {
-    highScores.push(Math.floor(finalScore));  // Add the new score to the list
-    highScores.sort(function (a, b) { return b - a }); // Sort the scores in descending order
-    highScores = Array.from(new Set(highScores)).slice(0, 5); // Remove duplicates and keep only the top five scores
-    document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:<br>' + highScores.join('<br>'); // Display the updated high scores
-    storedScores = highScores; // Update storedScores for future use
-    storeItem('storedScores', storedScores);
-  }
+  highScores.push(Math.floor(finalScore));  // Add the new score to the list
+  highScores.sort(function (a, b) { return b - a }); // Sort the scores in descending order
+  highScores = Array.from(new Set(highScores)).slice(0, 5); // Remove duplicates and keep only the top five scores
+  document.getElementsByClassName('highScores')[0].innerHTML = 'High Scores:<br>' + highScores.join('<br>'); // Display the updated high scores
+  storedScores = highScores; // Update storedScores for future use
+  storeItem('storedScores', storedScores);
+}
 
 function resetHighScores() { // // reset the stored scores and high score list
-  highScores.length=0; // removes all prior scores
+  highScores.length = 0; // removes all prior scores
   doHighScores(); // resets high score list to only show the most recent score
 }
 
@@ -222,6 +222,7 @@ function ballButton1() { // set assets and bg to beach
   speed = -.8;
 
 }
+
 function ballButton2() { // set assets and bg to snowy
   bSprite = 'assets/snowball.png';
   ball.img = bSprite;
@@ -229,7 +230,7 @@ function ballButton2() { // set assets and bg to snowy
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = snowBg;
-  document.getElementById("ballButton1").style.color = "black"; 
+  document.getElementById("ballButton1").style.color = "black";
   document.getElementById("ballButton2").style.color = "red"; // style as selected
   document.getElementById("ballButton3").style.color = "black";
   ball.bounciness = .3;
@@ -237,6 +238,7 @@ function ballButton2() { // set assets and bg to snowy
   speed = -1;
 
 }
+
 function ballButton3() { // set assets and bg to fire
   bSprite = 'assets/fireball.png';
   ball.img = bSprite;
