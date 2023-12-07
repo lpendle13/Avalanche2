@@ -12,6 +12,8 @@ let snowBg;
 let fireBg;
 let mainSong;
 let menuSong;
+let beachSong;
+let fireSong;
 let speed = -1;
 let snowFont; // add other fonts for score counter
 
@@ -22,6 +24,8 @@ function preload() {
   mainSong = loadSound('assets/icebreaker-main.mp3');
   menuSong = loadSound('assets/icebreaker-menu.mp3');
   snowFont = loadFont('assets/SnowtopCaps.otf');
+  beachSong = loadSound('assets/skywire.mp3');
+  fireSong = loadSound('assets/blackrock.mp3');
 }
 
 function setup() {
@@ -44,7 +48,7 @@ function setup() {
   platforms.velocity.y = 0; // control speed of platforms; larger = faster
   platforms.amount = 100;
 
-  platformStart = new Sprite(); // create first platform in center position
+  platformStart = new Group(); // create first platform in center position
   platformStart.img = platImg;
   platformStart.collider = 'kinematic';
   platformStart.x = canvas.w/2; // sets first platform at center horizontally
@@ -69,8 +73,8 @@ function draw() {
   startGame(); // switch to button later
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
-    ball.collider = 'static'; // change to dynamic once bug is fixed
-    platformStart.velocity.y = -10; platforms.velocity.y = -10; // change to -1 after fix
+    ball.collider = 'dynamic'; // change to dynamic once bug is fixed
+    platformStart.velocity.y = speed; platforms.velocity.y = speed; // change to -1 after fix
     countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
@@ -81,6 +85,8 @@ function draw() {
   
 function drawPlatforms() { // separate function, can be used with start button later
   new platforms.Sprite(); // draw platforms to canvas
+  new platformStart.Sprite();
+  platformStart.amount = 1;
   if (kb.pressing('left')) {
     platformStart.rotation = -15; platforms.rotation = -15;
 	} else if (kb.pressing('right')) {
@@ -125,14 +131,18 @@ function startButton() { // allow button to control game start
   document.getElementById("gameScreen").style.display="block";
   gameStart = true;
   finalScore = 0;
-  mainSong.play();
   menuSong.stop();
   if (canvasBg === fireBg) {
     speed = -1.5;
+    fireSong.play();
   }
   if (canvasBg === beachBg) {
     speed = -.8;
     ball.bounciness = .6;
+    beachSong.play();
+  }
+  if (canvasBg === snowBg){
+    mainSong.play();
   }
 }
 
@@ -168,7 +178,15 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("gameScreen").style.display = "none";
     document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
-    mainSong.stop();
+    if (canvasBg === fireBg) {
+      fireSong.stop();
+    }
+    if (canvasBg === beachBg) {
+      beachSong.stop();
+    }
+    if (canvasBg === snowBg){
+      mainSong.stop();
+    }
   }
 }
 
@@ -221,6 +239,7 @@ function ballButton1() { // set assets and bg to beach
   speed = -0.8;
 
 }
+
 function ballButton2() { // set assets and bg to snowy
   bSprite = 'assets/snowball.png';
   ball.img = bSprite;
@@ -236,6 +255,7 @@ function ballButton2() { // set assets and bg to snowy
   speed = -1;
 
 }
+
 function ballButton3() { // set assets and bg to fire
   bSprite = 'assets/fireball.png';
   ball.img = bSprite;
