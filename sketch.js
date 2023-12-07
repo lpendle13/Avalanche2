@@ -167,7 +167,7 @@ function gameEnd() { // hide canvas on game end and show try again button
     document.getElementById("startScreen").style.display="none";
     document.getElementById("endScreen").style.display="block";
     document.getElementById("gameScreen").style.display = "none";
-    document.getElementsByClassName('finalScore')[0].innerHTML = 'Congratulations! Score: ' + Math.floor(finalScore).toString();
+    document.getElementsByClassName('finalScore')[0].innerHTML = 'Game Over! Score: ' + Math.floor(finalScore).toString();
     doHighScores(); // update the high score list
     mainSong.stop();
   }
