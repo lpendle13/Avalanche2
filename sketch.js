@@ -7,14 +7,16 @@ let storedScores = [];
 let bSprite = 'assets/snowball.png';  // sets default theme to snowy
 let platImg = 'assets/snow-platform.png';
 let canvasBg = 'assets/snow-bg.png';
+let beachBg;
 let snowBg;
 let fireBg;
 let mainSong;
 let menuSong;
 let speed = -1;
-let snowFont;
+let snowFont; // add other fonts for score counter
 
 function preload() {
+  beachBg = loadImage('assets/beach-bg.png');
   snowBg = loadImage('assets/snow-bg.png');
   fireBg = loadImage('assets/fire-bg.png');
   mainSong = loadSound('assets/icebreaker-main.mp3');
@@ -183,7 +185,7 @@ function countScore() { // function that counts the score, runs while the gamepl
   fill(255);
   let fontsize=50;
   textSize(fontsize);
-  textFont(snowFont);
+  textFont(snowFont); 
   text('Score: ' + Math.floor(score).toString(),10,50);
 }
 
@@ -207,7 +209,7 @@ function ballButton1() { // set assets and bg to beach
   platImg = 'assets/sand-platform.png'
   platformStart.img = platImg;
   platforms.img = platImg;
-//  canvasBg = testBg; add back when bg exists
+  canvasBg = beachBg;
   document.getElementById("ballButton1").style.color = "red"; // style as selected
   document.getElementById("ballButton2").style.color = "black";
   document.getElementById("ballButton3").style.color = "black";
@@ -245,9 +247,9 @@ function ballButton3() { // set assets and bg to fire
 }
 
 // to do
+// bug fix the platform count... yayyyy
 // style the buttons
 // choose a font
 // audio control buttons
-// visuals. 3rd char?
 // add a cool title screen
 // test platform spacing, gravity, velocity, etc
