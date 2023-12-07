@@ -69,7 +69,7 @@ function draw() {
   if (gameStart == true) { // starts game movement and score counting
     ball.img = bSprite;
     ball.collider = 'dynamic';
-    platformStart.velocity.y = -1; platforms.velocity.y = -1; 
+    platformStart.velocity.y = speed; platforms.velocity.y = speed; 
     countScore();
   }
   if (outOfBounds == true && mouse.presses()) { // only works if ball is off screen
@@ -109,7 +109,7 @@ function startGame() { // control when game starts running
 function restartGame() { // restart game after losing
   allSprites.remove(); // clear previous platforms
   ball = new Sprite(canvas.w/2,canvas.h-200,50); // redraw ball to starting position
-  platformStart.velocity.y = -1; platforms.velocity.y = -1; // start platform movement
+  platformStart.velocity.y = speed; platforms.velocity.y = speed; // start platform movement
   outOfBounds = false;
   startGame();
 }
@@ -130,6 +130,10 @@ function startButton() { // allow button to control game start
   menuSong.stop();
   if (canvasBg === fireBg) {
     speed = -2;
+  }
+  if (canvasBg === beachBg) {
+    speed = -.7;
+    ball.bounciness = .6;
   }
 }
 
@@ -213,9 +217,9 @@ function ballButton1() { // set assets and bg to beach
   document.getElementById("ballButton1").style.color = "red"; // style as selected
   document.getElementById("ballButton2").style.color = "black";
   document.getElementById("ballButton3").style.color = "black";
-  ball.bounciness = .3;
-  world.gravity.y = 15;
-  speed = -1;
+  ball.bounciness = .6;
+  world.gravity.y = 8;
+  speed = -.5;
 
 }
 function ballButton2() { // set assets and bg to snowy
@@ -244,6 +248,7 @@ function ballButton3() { // set assets and bg to fire
   document.getElementById("ballButton2").style.color = "black";
   document.getElementById("ballButton3").style.color = "red"; // style as selected
   world.gravity.y = 30;
+  speed = -1.5;
 }
 
 // to do
