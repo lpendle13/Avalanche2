@@ -129,10 +129,10 @@ function startButton() { // allow button to control game start
   mainSong.play();
   menuSong.stop();
   if (canvasBg === fireBg) {
-    speed = -2;
+    speed = -1.5;
   }
   if (canvasBg === beachBg) {
-    speed = -.7;
+    speed = -.8;
     ball.bounciness = .6;
   }
 }
@@ -219,7 +219,7 @@ function ballButton1() { // set assets and bg to beach
   document.getElementById("ballButton3").style.color = "black";
   ball.bounciness = .6;
   world.gravity.y = 8;
-  speed = -.5;
+  speed = -.8;
 
 }
 function ballButton2() { // set assets and bg to snowy
