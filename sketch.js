@@ -15,7 +15,10 @@ let menuSong;
 let beachSong;
 let fireSong;
 let speed = -1;
-let snowFont; // add other fonts for score counter
+let beachFont;
+let snowFont; 
+let fireFont;
+let scoreFont;
 
 function preload() {
   beachBg = loadImage('assets/beach-bg.png');
@@ -23,9 +26,13 @@ function preload() {
   fireBg = loadImage('assets/fire-bg.png');
   mainSong = loadSound('assets/icebreaker-main.mp3');
   menuSong = loadSound('assets/icebreaker-menu.mp3');
+  beachFont = loadFont('assets/SomeTimeLater.otf');
   snowFont = loadFont('assets/SnowtopCaps.otf');
+  fireFont = loadFont('assets/chp-fire.ttf');
   beachSong = loadSound('assets/skywire.mp3');
   fireSong = loadSound('assets/blackrock.mp3');
+  scoreFont = snowFont;
+
 }
 
 function setup() {
@@ -220,7 +227,7 @@ function countScore() { // function that counts the score, runs while the gamepl
   fill(255);
   let fontsize=50;
   textSize(fontsize);
-  textFont(snowFont); 
+  textFont(scoreFont); 
   text('Score: ' + Math.floor(score).toString(),10,50);
 }
 
@@ -245,12 +252,16 @@ function ballButton1() { // set assets and bg to beach
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = beachBg;
-  document.getElementById("ballButton1").style.color = "red"; // style as selected
-  document.getElementById("ballButton2").style.color = "black";
-  document.getElementById("ballButton3").style.color = "black";
+  document.getElementById("ballButton1").style.background = "#C8DFD5"; // style as selected
+  document.getElementById("ballButton2").style.background="#A6C3BE";
+  document.getElementById("ballButton3").style.background="#A6C3BE";
+  document.getElementById("ballButton1").style.fontSize="24px";
+  document.getElementById("ballButton2").style.fontSize="20px";
+  document.getElementById("ballButton3").style.fontSize="20px";
   ball.bounciness = .6;
   world.gravity.y = 8;
   speed = -0.8;
+  scoreFont = beachFont;
 
 }
 function ballButton2() { // set assets and bg to snowy
@@ -260,12 +271,16 @@ function ballButton2() { // set assets and bg to snowy
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = snowBg;
-  document.getElementById("ballButton1").style.color = "black"; 
-  document.getElementById("ballButton2").style.color = "red"; // style as selected
-  document.getElementById("ballButton3").style.color = "black";
+  document.getElementById("ballButton1").style.background="#A6C3BE"; 
+  document.getElementById("ballButton2").style.background = "#C8DFD5"; // style as selected
+  document.getElementById("ballButton3").style.background="#A6C3BE";
+  document.getElementById("ballButton1").style.fontSize="20px";
+  document.getElementById("ballButton2").style.fontSize="24px";
+  document.getElementById("ballButton3").style.fontSize="20px";
   ball.bounciness = .3;
   world.gravity.y = 15;
   speed = -1;
+  scoreFont = snowFont;
 
 }
 function ballButton3() { // set assets and bg to fire
@@ -275,11 +290,15 @@ function ballButton3() { // set assets and bg to fire
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = fireBg;
-  document.getElementById("ballButton1").style.color = "black";
-  document.getElementById("ballButton2").style.color = "black";
-  document.getElementById("ballButton3").style.color = "red"; // style as selected
+  document.getElementById("ballButton1").style.background="#A6C3BE";
+  document.getElementById("ballButton2").style.background="#A6C3BE";
+  document.getElementById("ballButton3").style.background = "#C8DFD5"; // style as selected
+  document.getElementById("ballButton1").style.fontSize="20px";
+  document.getElementById("ballButton2").style.fontSize="20px";
+  document.getElementById("ballButton3").style.fontSize="24px";
   world.gravity.y = 30;
   speed = -1.5;
+  scoreFont = fireFont;
 }
 
 // to do

@@ -2,7 +2,10 @@
   font-family: SnowtopCaps;
   src: url(assets/SnowtopCaps.otf);
 }
-
+@font-face {
+  font-family: chp-fire;
+  src: url(assets/chp-fire.ttf);
+}
 html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -15,7 +18,7 @@ canvas {
 }
 
 body {
-  background-color: gray;
+  background-color: #8eada8;
 }
 
 #startScreen, #selectScreen, #endScreen, #ruleScreen {
@@ -53,16 +56,19 @@ h3 {
 
 #ruleScreen>p {
   font-size: 24px;
-  margin-top: 0;
+  margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #ruleScreen>button {
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 #ballButton2 { /* style to match active selection */
-  color: red;
+  font-size: 24px;
+  background-color: #C8DFD5;
 }
 
 #selectScreen {
@@ -106,21 +112,21 @@ h3 {
   width: 150px;
   position: absolute;
   left: 50px;
-  top: 275px;
+  top: 245px;
 }
 
 #ballButton2 {
   width: 150px;
   position: absolute;
   left: 225px;
-  top: 275px;
+  top: 245px;
 }
 
 #ballButton3 {
   width: 150px;
   position: absolute;
   right: 50px;
-  top: 275px;
+  top: 245px;
 }
 
 #homePage {
@@ -130,7 +136,8 @@ h3 {
 
 .diffs {
   position: absolute;
-  top: 225px;
+  top: 300px;
+  font-size: 14px;
 }
 
 #diff1 {
@@ -160,6 +167,9 @@ h3 {
   height: 50px;
   font-size: 20px;
   margin-bottom: 10px;
-  border-radius: 10px;
-  background-color: aliceblue;
+  border-radius: 15px;
+  background-color: #A6C3BE;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #ECF6EA #15555F #15555F #ECF6EA;
 }
