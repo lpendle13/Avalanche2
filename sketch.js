@@ -19,6 +19,7 @@ let beachFont;
 let snowFont; 
 let fireFont;
 let scoreFont;
+let isMuted = false;
 
 function preload() {
   beachBg = loadImage('assets/beach-bg.png');
@@ -170,7 +171,7 @@ function homeButton() { // allow button to navigate to main menu
   ball.collider = 'static';
   platformStart.velocity.y = 0; platforms.velocity.y = 0; 
   if (menuSong.isPlaying()){
-  } else {
+  } else if (isMuted === false) {
     menuSong.play();
   }
 }
@@ -218,6 +219,26 @@ function rulesButton() {
   document.getElementById("ruleScreen").style.display="block";
   ball.collider = 'static';
   platformStart.velocity.y = 0; platforms.velocity.y = 0; 
+}
+
+function muteButton() {
+  if (menuSong.isPlaying()){
+    menuSong.stop();
+    beachSong.setVolume(0);
+    mainSong.setVolume(0);
+    fireSong.setVolume(0);
+  } else {
+    menuSong.play();
+    beachSong.setVolume(1);
+    mainSong.setVolume(1);
+    fireSong.setVolume(1);
+  }
+
+  if (isMuted === false) {
+    isMuted = true;
+  } else {
+    isMuted = false;
+  }
 }
 
 function countScore() { // function that counts the score, runs while the gameplay is ongoing
