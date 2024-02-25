@@ -321,11 +321,3 @@ function ballButton3() { // set assets and bg to fire
   speed = -1.5;
   scoreFont = fireFont;
 }
-
-// to do
-// bug fix the platform count... yayyyy
-// style the buttons
-// choose a font
-// audio control buttons
-// add a cool title screen
-// test platform spacing, gravity, velocity, etc
