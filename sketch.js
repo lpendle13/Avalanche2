@@ -169,13 +169,13 @@ function homeButton() { // allow button to navigate to main menu
   document.getElementById("endScreen").style.display="none";
   document.getElementById("ruleScreen").style.display="none";
   document.getElementById("selectScreen").style.display="none";
-  ball.collider = 'static';
-  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
   if (menuSong.isPlaying()){
   } else if (isMuted === false) {
-    menuSong.play();
+    menuSong.pause();
   }
   restartGame();
+  ball.collider = 'static';
+  platformStart.velocity.y = 0; platforms.velocity.y = 0; 
 }
 
 function charButton() {
