@@ -141,6 +141,7 @@ function onOpen() { // hide try again button on open
 }
 
 function startButton() { // allow button to control game start
+  
   canvas.style.display="block";
   document.getElementById("startScreen").style.display="none";
   document.getElementById("endScreen").style.display="none";
@@ -174,6 +175,7 @@ function homeButton() { // allow button to navigate to main menu
   } else if (isMuted === false) {
     menuSong.play();
   }
+  restartGame();
 }
 
 function charButton() {
@@ -269,7 +271,7 @@ function resetHighScores() { // // reset the stored scores and high score list
 function ballButton1() { // set assets and bg to beach
   bSprite = 'assets/beachball.png';
   ball.img = bSprite;
-  platImg = 'assets/sand-platform.png'
+  platImg = 'assets/sand-platform.png';
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = beachBg;
@@ -288,7 +290,7 @@ function ballButton1() { // set assets and bg to beach
 function ballButton2() { // set assets and bg to snowy
   bSprite = 'assets/snowball.png';
   ball.img = bSprite;
-  platImg = 'assets/snow-platform.png'
+  platImg = 'assets/snow-platform.png';
   platformStart.img = platImg;
   platforms.img = platImg;
   canvasBg = snowBg;
